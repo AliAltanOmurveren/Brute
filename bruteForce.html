@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        var chars = ["a", 1, "e", "4", 2];
+
+        /*
+                for (var i = 0; i < 4; i++) {
+                        str += chars[i];
+                        for (var j = 0; j < 4; j++) {
+                            str += "" + chars[j];
+                            alert(str);
+                            str = chars[i];
+        
+                        }
+                        str = "";
+                    }
+        */
+        function brute() {
+            var str = "";
+            for (var i = 0; i < chars.length; i++) {
+                str += "" + chars[i];
+                inner(str, [i]);
+                str = "";
+            }
+        }
+        /*
+                function inner(str, i) {
+                    for (var j = 0; j < 4; j++) {
+                        str = "" + chars[i] + chars[j];
+                        inner(str, i, j);
+                        str = "" + chars[i];
+                    }
+                }
+        */
+
+        var n = 11;
+        function inner(str, iterators) {
+            var oldstr = str;
+            for (var j = 0; j < chars.length; j++) {
+
+                /*
+                                for (var i = 0; i < iterators.length; i++)
+                                    str = "" + chars[iterators[i]];
+                */
+                str += chars[j];
+
+                if (iterators.length == n - 1) {
+                    //check goes here
+                    if (str == "22222222222")
+                        alert("found it");
+
+                } else {
+
+                    var newiterators = new Array();
+                    for (var i = 0; i < iterators.length; i++)
+                        newiterators[i] = iterators[i];
+
+                    newiterators[iterators.length] = j;
+
+                    inner(str, newiterators);
+                    // for (var i = 0; i < iterators.length; i++)
+                    //    str = "" + chars[iterators[i]];
+
+                }
+                /*
+                for (var i = 0; i < iterators.length; i++)
+                        str = "" + chars[iterators.pop()];
+*/
+
+                str = oldstr;
+            }
+        }
+        /*
+                function inner(str, i, jj) {
+                    for (var j = 0; j < 4; j++) {
+                        str = "" + chars[i] + chars[jj] + chars[j];
+                        alert(str);
+                        str = "" + chars[i] + chars[jj];
+        
+                    }
+        
+                }*/
+        brute();
+
+    </script>
+</body>
+
+</html>
